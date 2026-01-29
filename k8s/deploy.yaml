@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-practice-deployment
+  labels:
+    app: practice-app
+    role: frontend        # Useful for the Network Policies we discussed
+spec:
+  replicas: 2             # High availability: 3 copies of your app
+  selector:
+    matchLabels:
+      app: practice-app
+  template:
+    metadata:
+      labels:
+        app: practice-app
+        role: frontend
+    spec:
+      containers:
+      - name: node-app
+        image: any9136/node-app:latest
+        ports:
+        - containerPort: 8080
+        
